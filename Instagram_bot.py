@@ -36,6 +36,11 @@ class Instagram:
         time.sleep(2)
         self.browser.find_element_by_class_name("k9GMp").find_element_by_tag_name("a").click()
         time.sleep(2)
+        followers = self.browser.find_element_by_class_name("PZuss").find_elements_by_tag_name("li")
+        for user in followers:
+            link = user.find_element_by_tag_name("a").get_attribute("href")
+            print(link)
+
 
     def followUser(self,username):
         pass
