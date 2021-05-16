@@ -26,13 +26,16 @@ class Instagram:
 
         passwordInput.send_keys(Keys.ENTER)
 
-        time.sleep(5)
-        if self.browser.find_element_by_name('cmbtv'):
-            el = self.browser.find_element_by_name('cmbtv')
+        time.sleep(2)
+        if self.browser.find_element_by_class_name('cmbtv'):
+            el = self.browser.find_element_by_class_name('cmbtv')
             el.find_element_by_xpath(".//button[contains(.,'Şimdi Değil')]")
 
     def getFollowers(self):
-        pass
+        self.browser.get(f"https://www.instagram.com/{self.username}")
+        time.sleep(2)
+        self.browser.find_element_by_class_name("k9GMp").find_element_by_tag_name("a").click()
+        time.sleep(2)
 
     def followUser(self,username):
         pass
@@ -47,4 +50,5 @@ class Instagram:
 app = Instagram(username,password)
 
 app.signIn()
+app.getFollowers()
 
