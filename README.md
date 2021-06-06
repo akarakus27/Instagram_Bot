@@ -2,3 +2,4 @@
 Python ile İnstagram bot uygulaması 
 
 Selenium kütüphanesi kullanarak yapılmiştır
+
