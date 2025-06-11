@@ -43,10 +43,23 @@ class Instagram:
 
 
     def followUser(self,username):
-        pass
+        self.browser.get(f"https://www.instagram.com/{username}/")
+        time.sleep(2)
+        follow_button = self.browser.find_element_by_tag_name("button")
+        button_text = follow_button.text.lower()
+        if button_text == "takip et" or button_text == "follow":
+            follow_button.click()
 
     def unFollowers(self,username):
-        pass
+        self.browser.get(f"https://www.instagram.com/{username}/")
+        time.sleep(2)
+        follow_button = self.browser.find_element_by_tag_name("button")
+        button_text = follow_button.text.lower()
+        if button_text == "takiptesin" or button_text == "following":
+            follow_button.click()
+            time.sleep(1)
+            self.browser.find_element_by_xpath("//button[contains(text(), 'unfollow')]" \
+                "| //button[contains(text(), 'Takibi bırak')]").click()
 
     def __del__(self):
         time.sleep(10)
