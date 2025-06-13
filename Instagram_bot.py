@@ -37,9 +37,23 @@ class Instagram:
         self.browser.find_element_by_class_name("k9GMp").find_element_by_tag_name("a").click()
         time.sleep(2)
         followers = self.browser.find_element_by_class_name("PZuss").find_elements_by_tag_name("li")
+        result = []
         for user in followers:
             link = user.find_element_by_tag_name("a").get_attribute("href")
+            result.append(link)
             print(link)
+        return result
+
+    def getFollowing(self):
+        self.browser.get(f"https://www.instagram.com/{self.username}/following/")
+        time.sleep(2)
+        following = self.browser.find_element_by_class_name("PZuss").find_elements_by_tag_name("li")
+        result = []
+        for user in following:
+            link = user.find_element_by_tag_name("a").get_attribute("href")
+            result.append(link)
+            print(link)
+        return result
 
 
     def followUser(self,username):
@@ -61,6 +75,13 @@ class Instagram:
             self.browser.find_element_by_xpath("//button[contains(text(), 'unfollow')]" \
                 "| //button[contains(text(), 'Takibi bırak')]").click()
 
+    def getNonFollowers(self):
+        followers = set(self.getFollowers())
+        followings = set(self.getFollowing())
+        non_followers = followings - followers
+        for user in non_followers:
+            print(user)
+
     def __del__(self):
         time.sleep(10)
         self.browser.close()
@@ -68,5 +89,5 @@ class Instagram:
 app = Instagram(username,password)
 
 app.signIn()
-app.getFollowers()
+app.getNonFollowers()
 
